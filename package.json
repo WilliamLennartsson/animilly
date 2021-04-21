@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "three": "^0.127.0",
+    "three-orbit-controls": "^82.1.0"
   }
 }
