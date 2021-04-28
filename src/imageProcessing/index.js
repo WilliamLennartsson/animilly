@@ -79,14 +79,14 @@ export default class {
   }
 }
 
-//  let switcher = 1;
-//  let counter = 0;
-//  setInterval(function () {
-//    counter++;
-//    if (counter % 12 === 0) {
-//      switcher *= -1;
-//    }
-//  }, 500);
+ let switcher = 1;
+ let counter = 0;
+ setInterval(function () {
+   counter++;
+   if (counter % 12 === 0) {
+     switcher *= -1;
+   }
+ }, 500);
 
 class Particle {
   constructor(canvas) {
@@ -112,15 +112,15 @@ class Particle {
     let movement = 2.5 - this.speed + this.velocity;
     this.angle += this.speed * 0.01;
     this.size = this.speed * 0.6;
-    // if (switcher === 1) {
-    //   ctx.globalCompositeOperation = "luminosity";
-    // } else {
-    //   ctx.globalCompositeOperation = "soft-light";
-    // }
-    // if (counter % 22 === 0) {
-    //   this.x = Math.random() * canvas.width;
-    //   this.y = 0;
-    // }
+    if (switcher === 1) {
+      ctx.globalCompositeOperation = "luminosity";
+    } else {
+      ctx.globalCompositeOperation = "soft-light";
+    }
+    if (counter % 22 === 0) {
+      this.x = Math.random() * canvas.width;
+      this.y = 0;
+    }
 
     this.y -= movement;
     this.x += movement + Math.sin(this.angle) * 2;

@@ -1,11 +1,6 @@
 
-import * as THREE from "three";
-import BasicCharacterControls from "../gallerySrc/characterControls";
+import GalleryApp from '../gallerySrc/galleryApp.js'
 
 window.onload = () => {
-  init()
+  GalleryApp()
 }
-const init = () => {
-  
-}
-

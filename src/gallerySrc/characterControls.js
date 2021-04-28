@@ -14,7 +14,7 @@ class BasicCharacterControls {
       right: false,
     };
     this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
-    this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
+    this._acceleration = new THREE.Vector3(1, 0.5, 100.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
 
     document.addEventListener("keydown", (e) => this._onKeyDown(e), false);
@@ -24,21 +24,23 @@ class BasicCharacterControls {
   _onKeyDown(event) {
     switch (event.keyCode) {
       case 87: // w
+      case 38: // up
         this._move.forward = true;
         break;
       case 65: // a
+      case 37: // left
         this._move.left = true;
         break;
       case 83: // s
+      case 40: // down
         this._move.backward = true;
         break;
       case 68: // d
+      case 39: // right
         this._move.right = true;
         break;
-      case 38: // up
-      case 37: // left
-      case 40: // down
-      case 39: // right
+      case 32: // SPACE
+        this._keys.space = true;
         break;
     }
   }
@@ -46,21 +48,23 @@ class BasicCharacterControls {
   _onKeyUp(event) {
     switch (event.keyCode) {
       case 87: // w
+      case 38: // up
         this._move.forward = false;
         break;
       case 65: // a
+      case 37: // left
         this._move.left = false;
         break;
       case 83: // s
+      case 40: // down
         this._move.backward = false;
         break;
       case 68: // d
+      case 39: // right
         this._move.right = false;
         break;
-      case 38: // up
-      case 37: // left
-      case 40: // down
-      case 39: // right
+      case 32: // SPACE
+        this._keys.space = false;
         break;
     }
   }

@@ -7,12 +7,18 @@
     "start": "parcel ./src/screens/*.html -p 5000",
     "build": "parcel build ./src/screens/*.html"
   },
+  "staticFiles": {
+    "staticPath": "src/assets"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "parcel-bundler": "^1.12.5",
-    "three": "^0.127.0",
-    "three-orbit-controls": "^82.1.0"
+    "tailwindcss": "^2.1.2",
+    "three": "^0.127.0"
+  },
+  "devDependencies": {
+    "parcel-plugin-static-files-copy": "^2.6.0"
   }
 }
