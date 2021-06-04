@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import path from "path";
+// import path from "path";
 import { Server } from "socket.io";
 import setupMongoose from "./db/setup.mjs";
 import userRoute from "./routes/userRoute.mjs";
@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 
 // This needs to be defined because of es6 module file format (.mjs)
-const __dirname = path.resolve(path.dirname(""));
+// const __dirname = path.resolve(path.dirname(""));
 const PORT = 3000; // <- add env
 
 const io = new Server(server, {
