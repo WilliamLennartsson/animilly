@@ -1,8 +1,8 @@
 
 import GalleryApp from '../gallerySrc/galleryApp.js'
-import { init } from '../multiplayer/testClient.js'
+import GameClient from "../multiplayer/client.js";
 
 window.onload = () => {
   // GalleryApp()
-  init()
+  const client = new GameClient();
 }

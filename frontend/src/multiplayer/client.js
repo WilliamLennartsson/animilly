@@ -1,11 +1,15 @@
 const { Manager } = require("socket.io-client");
 
 const setupIO = () => {
+  const galleryId = 'gallery123'
+  const authToken = '123'
+  
   const manager = new Manager("http://localhost:3000", {
     reconnectionDelayMax: 10000,
-    // query: {
-    //   "my-key": "my-value",
-    // },
+    query: {
+      "galleryId": galleryId,
+      "token": authToken
+    },
   });
 
   const socket = manager.socket("/", {
@@ -16,6 +20,15 @@ const setupIO = () => {
   return { manager, socket }
 }
 
+export default class GameClient {
+  constructor(params) {
+    const { manager, socket } = setupIO();
+    this.manager = manager
+    this.socket = socket
+
+    // socket.emit("chat message", "Hejhej");
+  }
+}
 export const init = () => {
   const { manager, socket } = setupIO();
 
