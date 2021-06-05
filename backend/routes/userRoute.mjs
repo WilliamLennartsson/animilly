@@ -52,7 +52,7 @@ router.post("/signin", async (req, res) => {
       return res.status(401).send({ message: "Incorrect email or password" });
     }
 
-    const correctPassword = compareHash(password, user.password)
+    const correctPassword = await compareHash(password, user.password)
 
     if (!correctPassword) {
         return res.status(401).send({ message: "Incorrect email or password" });
