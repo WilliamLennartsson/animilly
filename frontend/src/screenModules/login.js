@@ -31,13 +31,19 @@ class AuthClient {
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((res) => res.json())
+      .then(res => {
+        return res.json().then((resJson) => {
+          return { data: resJson, status: res.status, ok: res.ok };
+        });
+      })
       .then((result) => {
+        // RESULT -> { data, error, status, ok }
         if (result.ok && result.status == 200) {
-          this.saveAuthToken(result.token);
+          const { token, user } = result.data
+          this.saveAuthToken(token);
           callback(user, null);
         } else {
-          callback(null, new Error(result.message))
+          callback(null, new Error(`Code: ${result.status} - ${result.data.message}`));
         }
       })
       .catch((err) => {
@@ -58,7 +64,7 @@ class AuthClient {
 
 window.onload = () => {
   const loginForm = document.querySelector("#loginform");
-  const errorText = document.querySelector("#errorlabel")
+  const errorText = document.querySelector("#errorlabel");
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (e.submitter.id === "submitWithEmailAndPwBtn") {
@@ -68,11 +74,12 @@ window.onload = () => {
       const auth = new AuthClient();
       auth.signIn(email, password, (user, error) => {
         if (error) {
-          console.log(`error signing in..`, error)
-          errorText.innerHTML = error.message
+          console.log(`error signing in..`, error);
+          errorText.innerHTML = error.message;
         }
         if (user) {
-          console.log(`Got user`, user)
+          console.log(`Got user`, user);
+          
         }
       });
     } else if (e.submitter.id === "submitAsGuestBtn") {
