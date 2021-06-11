@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/create", authUser, async (req, res, next) => {
   try {
     const host = req.user
-    console.log(`host`, host)
+    
     const newGallery = await DB.createGallery(host);
 
     if (newGallery) {

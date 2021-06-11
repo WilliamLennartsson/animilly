@@ -59,7 +59,6 @@ router.post("/signin", async (req, res) => {
     }
 
     delete user.password;
-    // delete user.isAdmin;
     const token = generateAuthToken(user)
 
     return res.status(200).send({ message: "Success", token, user });

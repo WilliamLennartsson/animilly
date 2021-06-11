@@ -1,0 +1,46 @@
+-- Stack --
+
+- Backend -
+Node
+Express
+Mongoose
+Atlas
+jwt
+socket.io
+socket.io-redis (multi server / scaling)
+glMatrix (?)
+
+- Frontend -
+????? Vue?????? Vanilla??? 
+Current - vanilla js, parsel budler.. 
+three js
+axios(?)
+socket.io-client
+
+
+-- FEATURES --
+
+Create accout
+Login
+
+View galleries
+Join gallery
+
+Create / config gallery
+Create paitings / upload images
+Host session
+
+
+-- GALLERY FEATURES -- 
+
+Gallery 3d
+- avatar
+- Paitings mapped to db
+- Gestures
+- Animations
+- Chat?
+- NFT (lol senare)
+
+
+
+

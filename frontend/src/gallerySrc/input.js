@@ -17,46 +17,49 @@ export class InputController {
   }
 
   _onKeyDown(event) {
-    switch (event.keyCode) {
-      case 87: // w
+    console.log(`this.keys`, this.keys)
+    switch (event.code) {
+      case "KeyW": // w
         this._keys.forward = true;
         break;
-      case 65: // a
+      case "KeyA": // a
         this._keys.left = true;
         break;
-      case 83: // s
+      case "KeyS": // s
         this._keys.backward = true;
         break;
-      case 68: // d
+      case "KeyD": // d
         this._keys.right = true;
         break;
-      case 32: // SPACE
+      case "Space": // SPACE
         this._keys.space = true;
         break;
-      case 16: // SHIFT
+      case "ShiftRight":
+      case "ShiftLeft": // SHIFT
         this._keys.shift = true;
         break;
     }
   }
 
   _onKeyUp(event) {
-    switch (event.keyCode) {
-      case 87: // w
+    switch (event.code) {
+      case "KeyW": // w
         this._keys.forward = false;
         break;
-      case 65: // a
+      case "KeyA": // a
         this._keys.left = false;
         break;
-      case 83: // s
+      case "KeyS": // s
         this._keys.backward = false;
         break;
-      case 68: // d
+      case "KeyD": // d
         this._keys.right = false;
         break;
-      case 32: // SPACE
+      case "Space": // SPACE
         this._keys.space = false;
         break;
-      case 16: // SHIFT
+      case "ShiftRight": // SHIFT
+      case "ShiftLeft":
         this._keys.shift = false;
         break;
     }
