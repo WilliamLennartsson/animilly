@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import cors from "cors";
+import helmet from "helmet";
 import { Server } from "socket.io";
 import setupMongoose from "./db/setup.mjs";
 import userRoute from "./routes/userRoute.mjs";
@@ -13,12 +14,12 @@ const PORT = process.env.PORT || 3000; // <- add env
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5000",
+    origin: "http://localhost:8080",
     methods: ["GET", "POST"],
   },
 });
 
-const allowlist = ["http://localhost:5000"];
+const allowlist = ["http://localhost:8080"];
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
   if (allowlist.indexOf(req.header("Origin")) !== -1) {
@@ -32,7 +33,7 @@ const corsOptionsDelegate = function (req, callback) {
 // Middlewares
 app.use(express.json());
 app.use(cors({ origin: allowlist[0] })); // TODO: Fix corsDelegate
-// TODO: Helmet?
+app.use(helmet());
 
 // Routes
 app.use("/users", userRoute);
@@ -56,19 +57,34 @@ const state = {
 
 // Sockets
 io.on("connection", (socket) => {
-  // const token = socket.handshake.query.token;
-  // const galleryId = socket.handshake.query.galleryId;
+  const token = socket.handshake.query.token;
+  const galleryId = socket.handshake.query.galleryId;
+  const userId = socket.handshake.query.userId;
 
-  socket.broadcast.emit("hi");
+  const player = {
+    userId: userId,
+    username: "Pelle",
+    position: { x: 0, y: 0, z: 0 },
+    rotation: 0,
+    actions: [],
+  };
+  
+  state[galleryId].players.push(player);
 
   socket.on("disconnect", () => {
+    const userIndex = state[galleryId].players.indexOf(player);
+    state[galleryId].players.splice(userIndex, 1)
     console.log("user disconnected");
   });
 
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-    console.log("message: " + msg);
-  });
+  if (!state[galleryId]) state[galleryId] = { id: galleryId, players: [] };
+
+  socket.join(galleryId);
+
+  // socket.on("chat message", (msg) => {
+  //   io.emit("chat message", msg);
+  //   console.log("message: " + msg);
+  // });
 });
 
 server.listen(PORT, () => {
