@@ -39,9 +39,9 @@ class BasicCharacterControls {
       case 39: // right
         this._move.right = true;
         break;
-      case 32: // SPACE
-        this._keys.space = true;
-        break;
+      // case 32: // SPACE
+      //   this._keys.space = true;
+      //   break;
     }
   }
 
@@ -62,9 +62,6 @@ class BasicCharacterControls {
       case 68: // d
       case 39: // right
         this._move.right = false;
-        break;
-      case 32: // SPACE
-        this._keys.space = false;
         break;
     }
   }

@@ -63,6 +63,7 @@ class DBClient {
       return gallery;
     });
   }
+  
   getGalleriesForUser(userId) {
     return models.galleries.find({ hostId: userId }).then((galleries) => {
       if (galleries) {
