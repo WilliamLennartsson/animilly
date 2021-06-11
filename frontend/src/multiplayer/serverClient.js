@@ -29,7 +29,7 @@ export default class GameClient {
     // socket.emit("chat message", "Hejhej");
   }
 }
-export const init = () => {
+export const init = (user) => {
   const { manager, socket } = setupIO();
 
   var messages = document.getElementById("messages");
