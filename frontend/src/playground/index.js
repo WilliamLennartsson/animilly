@@ -77,7 +77,6 @@ const collatz = (canvas) => {
     }
   };
 
-  // TODO: Animate
   const update = () => {
     const updatesPerFrame = 3; // Math.floor(Math.random() * 10) + 1
     for (let i = 0; i < updatesPerFrame; i++) {
@@ -107,20 +106,8 @@ const collatz = (canvas) => {
   };
 
   clearBackground();
-  // Wierd starWeb
-  // renderCollatzTree({
-  //   x: width * 0.5,
-  //   y: height * 0.5,
-  //   numBranches: 500,
-  //   reversed: false,
-  //   sectionLength: 25,
-  //   angle: Math.PI / 1.25,
-  // });
 
-  // renderCollatzTree(new CollatzConfig({
-  //   x: 100,
-  //   y: 100
-  // }));
+  // Test configs
   renderCollatzTree(
     new CollatzConfig({
       x: width * 0.15,
