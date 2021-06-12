@@ -6,8 +6,8 @@ import {
 } from "./collatz.js";
 
 const collatz = (canvas) => {
-  canvas.height = 1080;
-  canvas.width = 1920;
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
   const width = canvas.width;
   const height = canvas.height;
   const ctx = canvas.getContext("2d");
@@ -55,7 +55,7 @@ const collatz = (canvas) => {
   };
 
   const renderCollatzTree = (config = new CollatzConfig()) => {
-    console.log(`config`, config);
+    // console.log(`config`, config);
     if (config.animate) {
       const animation = new CollatzAnimation(config);
       console.log("Adding new animation to queue");
@@ -151,7 +151,7 @@ const collatz = (canvas) => {
       y: height,
       numBranches: 100,
       reversed: false,
-      sectionLength: 10,
+      sectionLength: 12,
       angle: Math.PI / 8,
       animate: true,
       color: "rgba(255, 210, 140, 0.4)",
