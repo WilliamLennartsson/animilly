@@ -23,7 +23,7 @@ const createTree = (ctx) => {
     ctx.moveTo(0, 0);
     // ctx.lineTo(0, -len);
     if (angle > 0) {
-      ctx.bezierCurveTo(10, -len/2, 20, -len/2, 0, -len)
+      ctx.bezierCurveTo(10, -len / 2, 20, -len / 2, 0, -len)
     } else {
       ctx.bezierCurveTo(10, -len / 2, -20, -len / 2, 0, -len);
     }
@@ -31,7 +31,7 @@ const createTree = (ctx) => {
 
     if (len < 15) {
       ctx.beginPath()
-      if (Math.random() > 0.5) {
+      if (angle > 0) {
         ctx.arc(0, -len, 20, 0, Math.PI/2)
       } else {
         ctx.arc(0, -len, 20, Math.PI, Math.PI/2, true);
