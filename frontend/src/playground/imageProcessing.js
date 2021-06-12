@@ -1,12 +1,16 @@
 import forestImage from "../assets/forest.jpeg";
 
 export default class {
+
+  constructor(canvas) {
+    this.canvas = canvas
+  }
+
   start() {
     const myImage = new Image();
+    const canvas = this.canvas
     myImage.src = forestImage;
-
     myImage.addEventListener("load", function () {
-      const canvas = document.getElementById("animationCanvas");
       const ctx = canvas.getContext("2d");
       const gradient1 = ctx.createLinearGradient(
         0,
