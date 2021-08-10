@@ -33,7 +33,8 @@ const loadDuckModel = (scene) => {
 };
 
 // APP entryPoint
-const GalleryApp = () => {
+const GalleryApp = (config) => {
+  const { token, gameClient } = config
   // Renderer
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
