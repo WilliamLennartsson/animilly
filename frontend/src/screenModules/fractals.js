@@ -4,5 +4,6 @@ window.onload = () => {
   const canvas = document.getElementById("animationCanvas");
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
-  Fractals.start(canvas);
+  Fractals.fractalTreeDemo(canvas);
+  // Fractals.paintingDemo(canvas)
 };
