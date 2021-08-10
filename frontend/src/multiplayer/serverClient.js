@@ -1,5 +1,7 @@
 const { Manager } = require("socket.io-client");
 
+const REQ_MOVE = 'move'
+
 const setupIO = () => {
   const galleryId = 'gallery123'
   const authToken = '123'
@@ -25,8 +27,12 @@ export default class GameClient {
     const { manager, socket } = setupIO();
     this.manager = manager
     this.socket = socket
+  }
 
-    // socket.emit("chat message", "Hejhej");
+  requestMove(player, dir) {
+    this.socket.emit(REQ_MOVE, res => {
+      console.log(`REQUEST MOVE res`, res)
+    })
   }
 }
 export const init = (user) => {
