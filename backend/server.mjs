@@ -81,10 +81,10 @@ io.on("connection", (socket) => {
 
   socket.join(galleryId);
 
-  // socket.on("chat message", (msg) => {
-  //   io.emit("chat message", msg);
-  //   console.log("message: " + msg);
-  // });
+  socket.on("move", (dir) => {
+    io.emit("move", dir);
+    console.log("move: " + dir);
+  });
 });
 
 server.listen(PORT, () => {
