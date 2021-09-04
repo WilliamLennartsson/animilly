@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { validateEmail } from "../validation.mjs";
 
 const GallerySchema = new mongoose.Schema({
-  _id: {
+  id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     trim: true,

@@ -6,15 +6,18 @@ import { Server } from "socket.io";
 import setupMongoose from "./db/setup.mjs";
 import userRoute from "./routes/userRoute.mjs";
 import galleryRoute from "./routes/galleryRoute.mjs";
+import config from "./db/config.mjs";
+import GalleryApp from "./galleryAPI/galleryAPI.mjs";
 const app = express();
 const server = http.createServer(app);
 // TODO: RedisIO for multiple synced servers
-
-const PORT = process.env.PORT || 3000; // <- add env
+const PORT = config.PORT; // <- add env
+console.log(`config server file`, config);
+console.log(`PORT`, PORT);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:8080",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
@@ -42,61 +45,18 @@ app.use("/galleries", galleryRoute);
 // Mongoose
 setupMongoose();
 
-const state = {
-  "98123102930okok": {
-    players: [
-      {
-        username: "Pelle",
-        position: { x: 0, y: 0, z: 0 },
-        rotation: 0,
-        actions: ["MOVE_LEFT", "JUMP"],
-      },
-    ],
-  },
-};
-
-// Sockets
-io.on("connection", (socket) => {
-  const token = socket.handshake.query.token;
-  const galleryId = socket.handshake.query.galleryId;
-  const userId = socket.handshake.query.userId;
-
-  const player = {
-    userId: userId,
-    username: "Pelle",
-    position: { x: 0, y: 0, z: 0 },
-    rotation: 0,
-    actions: [],
-  };
-  
-  state[galleryId].players.push(player);
-
-  socket.on("disconnect", () => {
-    const userIndex = state[galleryId].players.indexOf(player);
-    state[galleryId].players.splice(userIndex, 1)
-    console.log("user disconnected");
-  });
-
-  if (!state[galleryId]) state[galleryId] = { id: galleryId, players: [] };
-
-  socket.join(galleryId);
-
-  socket.on("move", (dir) => {
-    io.emit("move", dir);
-    console.log("move: " + dir);
-  });
-});
+GalleryApp(io)
 
 server.listen(PORT, () => {
-  console.log("listening on *:3000");
+  console.log("listening on " + PORT);
 });
 
 const joinRoom = (player, roomId) => {};
 
 const authMiddleware = (socket, next) => {
   const handshakeData = socket.request;
-  console.log("IO auth middleware:", handshakeData._query["token"]);
+  console.log("IO auth middleware:", handshakeData["token"]);
   next();
 };
 
-io.use(authMiddleware);
+// io.use(authMiddleware);
